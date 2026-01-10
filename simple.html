@@ -10,7 +10,6 @@
         :root {
             --bg: #C7EDCC;
             --glass: rgba(255, 255, 255, 0.45);
-            /* --glass-hover 变量已移除，因为不再需要卡片变色 */
             --accent: #2d862d;
             --text: #1a1a1a;
             --red: #cc0000;
@@ -28,7 +27,7 @@
             height: 100%;
             overflow-x: hidden;
             background: var(--bg);
-            /* 现代美观字体栈 */
+            /* 字体栈优化 */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
             color: var(--text);
             -webkit-font-smoothing: antialiased;
@@ -53,7 +52,7 @@
 
         .logo { margin-right: 20px; flex-shrink: 0; }
         .logo img { height: 45px; width: auto; display: block; border-radius: 4px; transition: 0.2s; }
-        .logo:hover img { transform: scale(1.05); } /* Logo本身的微动效保留 */
+        .logo:hover img { transform: scale(1.05); }
 
         .search-box {
             width: 100%;
@@ -85,17 +84,17 @@
         /* 主内容网格 */
         .main-content {
             width: 100%;
-            max-width: 1180px; /* 紧凑宽度 */
+            max-width: 1065px;
             padding: 0 30px 40px;
             
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px; /* 紧凑间距 */
+            gap: 20px;
             
             align-content: start;
         }
 
-        /* 分组卡片 - 已移除hover效果 */
+        /* 分组卡片 */
         .group-card {
             background: var(--glass);
             border-radius: 18px;
@@ -103,7 +102,6 @@
             border: 1px solid rgba(255,255,255,0.3);
             display: flex;
             flex-direction: column;
-            /* 移除了 transition, transform, box-shadow hover */
         }
 
         .group-title {
@@ -141,7 +139,7 @@
             background: rgba(255,255,255,0.4);
             padding: 8px 14px;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 16px; /* 基础字号 */
             display: inline-flex;
             align-items: center;
             border: 1px solid rgba(255,255,255,0.1);
@@ -149,7 +147,6 @@
             cursor: pointer;
         }
 
-        /* 按钮的Hover效果保留，为了交互反馈 */
         .bubble:hover {
             background: #fff;
             border-color: var(--accent);
@@ -160,7 +157,9 @@
             color: var(--text);
             text-decoration: none;
             white-space: normal;
-            font-weight: 500;
+            /* 核心修改：统一使用 normal 字重，消除渲染差异 */
+            font-weight: normal; 
+            font-size: 100%;
         }
 
         .bubble a:hover { color: var(--red); }
@@ -178,7 +177,12 @@
             font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
         }
 
-        .hl { color: var(--red) !important; font-weight: bold; }
+        /* 核心修改：确保红色高亮字体与普通链接完全一致 */
+        .hl { 
+            color: var(--red) !important; 
+            font-weight: normal !important; /* 强制标准字重 */
+            font-size: 100% !important; /* 强制大小一致 */
+        }
 
         /* 响应式适配 */
         @media (max-width: 1000px) {
@@ -247,7 +251,6 @@
         <div class="bubble-flow">
             <div class="bubble"><a href="https://github.com/">GitHub</a></div>
             <div class="bubble"><a href="https://juejin.im/">掘金</a><span>の</span><a href="https://www.v2ex.com/"><span class="hl">V2EX</span></a></div>
-            <div class="bubble"><a href="https://stackoverflow.com/">S<span class="hl">O</span>F</a><span>の</span><a href="https://segmentfault.com/">S<span class="hl">G</span>F</a></div>
             <div class="bubble"><a href="https://www.oschina.net/">OS</a><span>の</span><a href="https://tool.oschina.net/">Tools</a></div>
             <div class="bubble"><a href="http://www.csdn.net/">CSDN</a></div>
             <div class="bubble"><a href="https://www.cnblogs.com/">cnBlogs</a></div>
