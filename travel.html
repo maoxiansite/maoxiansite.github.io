@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>泊在太湖边：端午无锡三日与丹阳归程</title>
+  <style>
+    :root {
+      --ink: #102331;
+      --muted: #5d6e7b;
+      --paper: #f6fbff;
+      --panel: #ffffff;
+      --line: #d7e6ee;
+      --teal: #0f766e;
+      --lake: #1d4ed8;
+      --coral: #dc5f45;
+      --gold: #d99a1e;
+      --shadow: 0 18px 46px rgba(23, 53, 70, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(8, 20, 32, 0.08), rgba(8, 20, 32, 0.78)),
+        url("images/travel/hero-taihu.png") center / cover no-repeat;
+    }
+
+    .hero-inner {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 64px 0 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.48);
+      background: rgba(16, 35, 49, 0.38);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 18px 0 16px;
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(17px, 2.1vw, 22px);
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .quick-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      width: min(1120px, calc(100% - 40px));
+      margin: -42px auto 0;
+      position: relative;
+      z-index: 2;
+      box-shadow: var(--shadow);
+    }
+
+    .quick-strip div {
+      background: var(--panel);
+      min-height: 108px;
+      padding: 18px;
+    }
+
+    .quick-strip b {
+      display: block;
+      color: var(--teal);
+      font-size: 14px;
+    }
+
+    .quick-strip span {
+      display: block;
+      margin-top: 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 54px auto 80px;
+    }
+
+    section {
+      margin: 54px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 430px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .route-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .route-card img {
+      width: 100%;
+      height: 190px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .route-card .body {
+      padding: 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 2px 9px;
+      border: 1px solid currentColor;
+      color: var(--lake);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h3 {
+      margin: 10px 0 8px;
+      font-size: 22px;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .route-card p,
+    .timeline p,
+    .note p,
+    .source-list p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .date {
+      border-right: 1px solid var(--line);
+      padding-right: 18px;
+    }
+
+    .date strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+      color: var(--coral);
+    }
+
+    .date span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .slots {
+      display: grid;
+      gap: 12px;
+    }
+
+    .slot {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .slot time {
+      color: var(--teal);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .slot b {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .note {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .note h3 {
+      margin-top: 0;
+    }
+
+    .note ul,
+    .note ol {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .note li + li {
+      margin-top: 8px;
+    }
+
+    .accent {
+      border-left: 5px solid var(--gold);
+    }
+
+    .traffic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .traffic div {
+      border-top: 4px solid var(--teal);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 145px;
+    }
+
+    .traffic b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .food-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .food-list div {
+      background: #eaf6f3;
+      border: 1px solid #b9d8d1;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 102px;
+    }
+
+    .food-list b {
+      display: block;
+      color: #0b5f59;
+    }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .source-list a {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--lake);
+      text-decoration: none;
+      min-height: 78px;
+    }
+
+    footer {
+      padding: 34px 20px;
+      background: #102331;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      .quick-strip,
+      .route-grid,
+      .traffic,
+      .food-list,
+      .source-list,
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .day {
+        grid-template-columns: 1fr;
+      }
+
+      .date {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding-right: 0;
+        padding-bottom: 12px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        min-height: 82vh;
+      }
+
+      .hero-inner,
+      .quick-strip,
+      main {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .quick-strip,
+      .route-grid,
+      .traffic,
+      .food-list,
+      .source-list,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .slot {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 8px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .hero {
+        min-height: auto;
+        color: var(--ink);
+        background: #fff;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .hero-inner {
+        padding: 28px 0;
+      }
+
+      .hero p,
+      .eyebrow {
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .quick-strip {
+        margin: 16px auto 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">2026年6月19日-21日 · 端午三天 · 自驾泊太湖</div>
+      <h1>泊在太湖边：端午无锡三日与丹阳归程</h1>
+      <p>主线是“自驾泊太湖，最后一日经丹阳返杭”。住在无锡太湖新城洲际，两晚都回酒店休息，退房后去丹阳配镜，再从丹阳直接回杭州。</p>
+    </div>
+  </header>
+
+  <div class="quick-strip" aria-label="行程摘要">
+    <div>
+      <b>出发</b>
+      <span>6月19日周五下午自驾</span>
+    </div>
+    <div>
+      <b>住宿</b>
+      <span>无锡太湖新城洲际</span>
+    </div>
+    <div>
+      <b>刚需</b>
+      <span>6月21日上午丹阳配镜</span>
+    </div>
+    <div>
+      <b>归程</b>
+      <span>丹阳配镜后返杭</span>
+    </div>
+  </div>
+
+  <main>
+    <section>
+      <div class="section-head">
+        <h2>路线总览</h2>
+        <p>把丹阳放到最后一天，退房后顺路去配镜再返杭；无锡两天只围绕酒店、太湖和老城展开，减少折返。</p>
+      </div>
+      <div class="route-grid">
+        <article class="route-card">
+          <img src="images/travel/nanchang-street.png" alt="无锡南长街夜景">
+          <div class="body">
+            <span class="tag">Day 1 夜游</span>
+            <h3>杭州自驾到无锡，入住后逛南长街</h3>
+            <p>下午开车到太湖新城洲际，先办理入住和停车；晚饭去清名桥、南长街，若周边车位紧张，改停南禅寺或阳春巷周边。</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="images/travel/yantouzhu-taihu.png" alt="鼋头渚长春桥与太湖">
+          <div class="body">
+            <span class="tag">Day 2 太湖</span>
+            <h3>鼋头渚看太湖，下午老城慢逛</h3>
+            <p>从酒店开车去鼋头渚，优先导航充山大门停车场；下午按体力选择蠡湖、惠山古镇/寄畅园或回酒店休整。</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="images/travel/danyang-glasses.png" alt="丹阳眼镜城眼镜陈列">
+          <div class="body">
+            <span class="tag">Day 3 归程</span>
+            <h3>退房去丹阳配镜，再回杭州</h3>
+            <p>酒店退房后装好行李，开车去丹阳眼镜城周边；配镜结束从丹阳直接返杭，不再折回无锡。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>每日安排</h2>
+        <p>时间按端午自驾客流留了缓冲；景区停车、演出和配镜取片时间请出发前一天再确认，并以地图实时路况为准。</p>
+      </div>
+      <div class="timeline">
+        <article class="day">
+          <div class="date">
+            <strong>06/19</strong>
+            <span>周五 · 杭州出发</span>
+          </div>
+          <div class="slots">
+            <div class="slot">
+              <time>14:00-16:30</time>
+              <div>
+                <b>杭州自驾出发，到无锡太湖新城</b>
+                <p>下午出城容易遇到端午车流，建议提前加油、备水，导航直接设为无锡太湖新城洲际。不要把晚饭订得太紧，给高速和入城路段留缓冲。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>17:00-18:30</time>
+              <div>
+                <b>入住、停车、休整</b>
+                <p>先把车停进酒店，确认第二天是否需要挪车和停车收费规则；把第三天丹阳配镜需要的旧眼镜、处方、隐形眼镜盒、身份证件放进随身包。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>18:50-21:30</time>
+              <div>
+                <b>南长街、清名桥古运河</b>
+                <p>可自驾去清名桥/南长街周边停车场，若车位紧张就停南禅寺或阳春巷周边后步行。晚饭可选酱排骨、银丝面、三鲜馄饨、玉兰饼。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="date">
+            <strong>06/20</strong>
+            <span>周六 · 太湖与老城</span>
+          </div>
+          <div class="slots">
+            <div class="slot">
+              <time>07:30-09:15</time>
+              <div>
+                <b>酒店出发去鼋头渚</b>
+                <p>自驾优先导航“鼋头渚充山大门停车场”。端午上午车位紧张，建议早到；若停车排队明显，减少园内支线，把湖边主线走舒服。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>09:30-12:30</time>
+              <div>
+                <b>鼋头渚游览</b>
+                <p>建议走充山大门、太湖佳绝处、鼋渚春涛、游船到太湖仙岛一线，按体力增减。午饭可在景区简单解决，或回蠡湖/市区再吃。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>12:30-14:30</time>
+              <div>
+                <b>蠡湖或回酒店休整</b>
+                <p>想继续看湖就去蠡湖沿线，想省体力就回太湖新城休息。自驾不要把下午塞满，端午景区出口和停车场都可能慢。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>15:00-18:00</time>
+              <div>
+                <b>惠山古镇/寄畅园</b>
+                <p>如果体力还好，开车去惠山古镇周边停车场，慢逛祠堂群、泥人、茶点和寄畅园。停车满位时就把它换成酒店附近轻松晚餐。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>18:30以后</time>
+              <div>
+                <b>回太湖新城或补南长街夜色</b>
+                <p>第一晚没坐游船的话，这晚可补古运河夜游；如果累了，酒店附近吃饭后早点休息，给第三天丹阳配镜留精神。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="day">
+          <div class="date">
+            <strong>06/21</strong>
+            <span>周日 · 丹阳归程</span>
+          </div>
+          <div class="slots">
+            <div class="slot">
+              <time>08:30-09:30</time>
+              <div>
+                <b>退房、装行李、出发去丹阳</b>
+                <p>早餐后退房，把行李和旧眼镜资料放好，导航丹阳眼镜城周边停车场。这条线不比无锡直返更短，但能完成丹阳后置、不折返无锡的目标。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>10:30-14:00</time>
+              <div>
+                <b>丹阳眼镜城配镜</b>
+                <p>先验光再挑镜框，镜片品牌、折射率、膜层、防蓝光、散光轴位逐项写清。复杂镜片可能不能当天取，提前问清快递或补寄。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>14:00-16:00</time>
+              <div>
+                <b>午饭 + 取镜或等片</b>
+                <p>普通单光片通常有机会当天取。取镜时试戴10分钟，确认瞳距、镜腿松紧和地面变形感；等片时间过长就改快递。</p>
+              </div>
+            </div>
+            <div class="slot">
+              <time>16:00以后</time>
+              <div>
+                <b>丹阳直接回杭州</b>
+                <p>从丹阳直接返杭，尽量别拖到太晚再上高速。若当天取镜超时，优先保留安全返程时间，让店家快递新镜。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>自驾抓手</h2>
+        <p>这趟的关键不是景点多，而是把车停顺、把返程留稳。全程用地图实时路况校准，不写死精确车程。</p>
+      </div>
+      <div class="traffic">
+        <div>
+          <b>杭州 → 无锡</b>
+          <p>第一天下午出城预留拥堵，导航直接设为无锡太湖新城洲际。到酒店先停车入住，再决定晚间是否开车进老城。</p>
+        </div>
+        <div>
+          <b>无锡市内</b>
+          <p>太湖新城到鼋头渚适合自驾；南长街、惠山古镇停车压力更大，晚高峰可短途叫车或把车停在外围后步行。</p>
+        </div>
+        <div>
+          <b>无锡 → 丹阳 → 杭州</b>
+          <p>第三天退房后去丹阳眼镜城周边，再从丹阳直接返杭。它不是最短返杭线，但避免丹阳和无锡之间来回折返。</p>
+        </div>
+        <div>
+          <b>酒店停车</b>
+          <p>入住时确认停车入口、是否免费、是否需要报车牌。第二天若不挪车，提前确认酒店是否允许连续停放。</p>
+        </div>
+        <div>
+          <b>景区停车</b>
+          <p>鼋头渚优先导航充山大门停车场；惠山古镇和南长街优先找周边正规停车场，满位就停外围后步行。</p>
+        </div>
+        <div>
+          <b>返程节奏</b>
+          <p>丹阳配镜尽量上午到，下午尽早处理取镜或快递。返杭不要拖到深夜，端午最后一天把安全驾驶放第一位。</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>丹阳配镜清单</h2>
+        <p>配镜这件事最容易被“价格很香”带跑，建议按清单谈，别只问总价。</p>
+      </div>
+      <div class="two-col">
+        <div class="note accent">
+          <h3>到店前先定好</h3>
+          <ol>
+            <li>用途：日常、开车、电脑、运动、备用镜。</li>
+            <li>镜片：品牌、折射率、阿贝数、膜层、防蓝光是否需要。</li>
+            <li>参数：度数、散光、轴位、瞳距、瞳高，旧镜参数可作参考。</li>
+            <li>交付：当天取、快递寄回、售后调架、镜片质保凭证。</li>
+          </ol>
+        </div>
+        <div class="note">
+          <h3>现场小提醒</h3>
+          <ul>
+            <li>不要刚下车就匆忙验光，先休息10分钟。</li>
+            <li>高度数优先小框、轻框，试戴看鼻梁压力。</li>
+            <li>最终订单让店家写明“镜框型号 + 镜片品牌型号 + 参数”。</li>
+            <li>新镜到手看远处直线、楼梯、地面，明显晕眩要现场调整。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>吃什么</h2>
+        <p>三天不用追太多网红店，围绕景点就近吃，保留更多游玩体力。</p>
+      </div>
+      <div class="food-list">
+        <div>
+          <b>无锡酱排骨</b>
+          <span>偏甜口，适合第一晚尝。</span>
+        </div>
+        <div>
+          <b>三鲜馄饨</b>
+          <span>早餐或夜宵都稳。</span>
+        </div>
+        <div>
+          <b>玉兰饼</b>
+          <span>惠山古镇、老城小吃线可找。</span>
+        </div>
+        <div>
+          <b>太湖船菜/湖鲜</b>
+          <span>第二天中午看预算选择。</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>备选方案</h2>
+        <p>如果天气、停车或体力变化，可以按下面方式替换，不影响两晚住太湖新城、最后一天经丹阳返杭的主线。</p>
+      </div>
+      <div class="route-grid">
+        <article class="route-card">
+          <img src="images/travel/lingshan-buddha.png" alt="无锡灵山大佛">
+          <div class="body">
+            <span class="tag">想看大景区</span>
+            <h3>惠山古镇换灵山胜境</h3>
+            <p>第二天下午不逛惠山，直接自驾去灵山胜境。但马山方向更远，适合不怕晚归、体力充足且愿意处理景区停车的人。</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="images/travel/rainy-museum.png" alt="无锡雨天室内博物馆备选">
+          <div class="body">
+            <span class="tag">下雨天</span>
+            <h3>无锡博物院 + 商场休整</h3>
+            <p>遇到大雨，第二天把鼋头渚换成无锡博物院、海岸城/万象城，停车和吃饭都更稳，第三天照常去丹阳返杭。</p>
+          </div>
+        </article>
+        <article class="route-card">
+          <img src="images/travel/huishan-town.png" alt="无锡惠山古镇街区">
+          <div class="body">
+            <span class="tag">配镜超时</span>
+            <h3>丹阳取镜改快递</h3>
+            <p>如果镜片加工拖到下午很晚，别硬等到疲劳驾驶。确认参数和售后后改快递，把返杭时间留出来。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>信息来源</h2>
+        <p>用于核对景点定位、开放型街区、丹阳眼镜产业背景与图片素材。正式出发前请再查当天票务、停车和营业状态。</p>
+      </div>
+      <div class="source-list">
+        <a href="https://zh.wikipedia.org/wiki/%E9%BC%8B%E5%A4%B4%E6%B8%9A" target="_blank" rel="noopener">鼋头渚资料：位置、景点线索、太湖仙岛</a>
+        <a href="https://zh.wikipedia.org/wiki/%E6%B8%85%E5%90%8D%E6%A1%A5%E5%8F%A4%E8%BF%90%E6%B2%B3%E8%A1%97%E5%8C%BA" target="_blank" rel="noopener">清名桥古运河街区：交通、夜游与开放式街区</a>
+        <a href="https://zh.wikipedia.org/wiki/%E5%8D%97%E9%95%BF%E8%A1%97_%28%E6%97%A0%E9%94%A1%29" target="_blank" rel="noopener">南长街资料：古运河街区与步行街段</a>
+        <a href="https://en.wikipedia.org/wiki/Danyang,_Jiangsu" target="_blank" rel="noopener">丹阳眼镜产业背景：Spectacles City</a>
+        <a href="https://en.wikipedia.org/wiki/Grand_Buddha_at_Ling_Shan" target="_blank" rel="noopener">灵山大佛备选景点资料</a>
+        <a href="https://en.wuxi.gov.cn/2025-09/15/c_1125522.htm" target="_blank" rel="noopener">南长街图片与城市旅游参考</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    端午自驾无锡三天：两晚泊太湖，最后一日经丹阳配镜返杭。
+  </footer>
+</body>
+</html>

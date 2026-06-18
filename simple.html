@@ -2,18 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon"/>
-    <!-- 全局链接新窗口打开 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <base target="_blank">
     <title>毛线</title>
     <style>
         :root {
-            --bg: #C7EDCC;
-            --glass: rgba(255, 255, 255, 0.45);
+            --bg: #c7edcc;
+            --panel: rgba(255, 255, 255, 0.46);
+            --panel-strong: rgba(255, 255, 255, 0.68);
+            --line: rgba(61, 120, 72, 0.18);
             --accent: #2d862d;
-            --text: #1a1a1a;
+            --accent-dark: #1f6424;
+            --ink: #18221a;
+            --muted: #53695a;
             --red: #cc0000;
+            --shadow: 0 14px 34px rgba(40, 88, 47, 0.1);
         }
 
         * {
@@ -21,286 +25,360 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
+        html {
+            min-height: 100%;
             background: var(--bg);
-            /* 字体栈优化 */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            margin: 0;
+            min-height: 100vh;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 34rem),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 22rem),
+                var(--bg);
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        /* 头部区域 */
-        .header {
-            width: 100%;
-            flex-shrink: 0;
-            padding: 40px 20px 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .logo { margin-right: 20px; flex-shrink: 0; }
-        .logo img { height: 45px; width: auto; display: block; border-radius: 4px; transition: 0.2s; }
-        .logo:hover img { transform: scale(1.05); }
-
-        .search-box {
-            width: 100%;
-            max-width: 500px;
-            position: relative;
+        a:focus-visible,
+        input:focus-visible {
+            outline: 3px solid rgba(45, 134, 45, 0.32);
+            outline-offset: 3px;
         }
 
-        .search-box input {
-            width: 100%;
-            padding: 14px 25px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.4);
-            background: var(--glass);
-            backdrop-filter: blur(8px);
-            font-size: 18px;
-            outline: none;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            text-align: center;
+        .page {
+            width: min(1120px, calc(100% - 40px));
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 42px 0 46px;
         }
 
-        .search-box input:focus {
-            background: #fff;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            text-align: left;
-            padding-left: 25px;
-        }
-
-        /* 主内容网格 */
-        .main-content {
-            width: 100%;
-            max-width: 1065px;
-            padding: 0 30px 40px;
-            
+        .topbar {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            
-            align-content: start;
+            grid-template-columns: auto minmax(260px, 560px);
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 26px;
         }
 
-        /* 分组卡片 */
-        .group-card {
-            background: var(--glass);
-            border-radius: 18px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            display: flex;
-            flex-direction: column;
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 136px;
+            height: 52px;
+            border-radius: 8px;
+            transition: background 0.18s ease, transform 0.18s ease;
         }
 
-        .group-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 15px;
-            padding-left: 5px;
-            letter-spacing: 0.5px;
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.34);
+            transform: translateY(-1px);
+        }
+
+        .logo img {
+            display: block;
+            width: auto;
+            height: 42px;
+            border-radius: 4px;
+        }
+
+        .search {
+            width: 100%;
+        }
+
+        .search label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .search input {
+            width: 100%;
+            min-height: 52px;
+            padding: 0 24px;
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            border-radius: 999px;
+            background: var(--panel-strong);
+            box-shadow: var(--shadow);
+            color: var(--ink);
+            font-size: 18px;
+            line-height: 52px;
+            text-align: center;
+            transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, text-align 0.2s ease;
+        }
+
+        .search input::placeholder {
+            color: rgba(24, 34, 26, 0.48);
+        }
+
+        .search input:focus {
+            background: #fff;
+            border-color: rgba(45, 134, 45, 0.38);
+            box-shadow: 0 16px 36px rgba(40, 88, 47, 0.14);
+            text-align: left;
+        }
+
+        .site-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            align-items: start;
+        }
+
+        .group {
+            min-width: 0;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            border-radius: 8px;
+            background: var(--panel);
+            box-shadow: 0 8px 28px rgba(40, 88, 47, 0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .group h2 {
             display: flex;
             align-items: center;
+            gap: 8px;
+            margin: 0 0 14px;
+            color: var(--accent-dark);
+            font-size: 15px;
+            line-height: 1.2;
+            letter-spacing: 0;
         }
 
-        .group-title::before {
-            content: '';
-            display: inline-block;
+        .group h2::before {
+            content: "";
             width: 4px;
-            height: 14px;
-            background: var(--accent);
-            margin-right: 8px;
+            height: 15px;
             border-radius: 2px;
-            opacity: 0.7;
+            background: currentColor;
+            opacity: 0.72;
+            flex: 0 0 auto;
         }
 
-        .bubble-flow {
+        .links {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            align-content: flex-start;
+            align-items: flex-start;
         }
 
-        .bubble {
-            flex: 0 1 auto;
-            width: auto;
-            background: rgba(255,255,255,0.4);
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 16px; /* 基础字号 */
+        .pill {
             display: inline-flex;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.2s;
-            cursor: pointer;
+            max-width: 100%;
+            min-height: 38px;
+            padding: 7px 13px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.42);
+            color: var(--ink);
+            font-size: 16px;
+            line-height: 1.35;
+            transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
         }
 
-        .bubble:hover {
+        .pill:hover {
+            transform: translateY(-1px);
+            border-color: rgba(45, 134, 45, 0.42);
             background: #fff;
-            border-color: var(--accent);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 7px 18px rgba(40, 88, 47, 0.09);
         }
 
-        .bubble a {
-            color: var(--text);
-            text-decoration: none;
-            white-space: normal;
-            /* 核心修改：统一使用 normal 字重，消除渲染差异 */
-            font-weight: normal; 
-            font-size: 100%;
+        .pill a {
+            display: inline-block;
+            min-width: 0;
+            color: inherit;
+            font-weight: 400;
+            overflow-wrap: anywhere;
         }
 
-        .bubble a:hover { color: var(--red); }
-
-        /* “の”字符样式 */
-        .bubble span {
+        .pill a:hover {
             color: var(--red);
-            font-size: 0.85em;
+        }
+
+        .sep {
+            flex: 0 0 auto;
             margin: 0 5px;
-            font-weight: normal; 
-            opacity: 0.7;
-            position: relative;
-            top: -1px;
-            flex-shrink: 0;
+            color: var(--red);
             font-family: "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-size: 0.86em;
+            line-height: 1;
+            opacity: 0.72;
         }
 
-        /* 核心修改：确保红色高亮字体与普通链接完全一致 */
-        .hl { 
-            color: var(--red) !important; 
-            font-weight: normal !important; /* 强制标准字重 */
-            font-size: 100% !important; /* 强制大小一致 */
+        .hl {
+            color: var(--red);
         }
 
-        /* 响应式适配 */
-        @media (max-width: 1000px) {
-            .main-content { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 980px) {
+            .page {
+                width: min(100% - 32px, 1120px);
+                padding-top: 34px;
+            }
+
+            .site-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
-        @media (max-width: 768px) {
-            body { height: auto; display: block; }
-            .header { padding: 30px 15px 20px; gap: 10px; }
-            .logo img { height: 38px; }
-            .main-content { grid-template-columns: 1fr; gap: 15px; padding: 0 15px 40px; }
-            .group-card { padding: 18px 15px; }
-            .group-title { font-size: 17px; margin-bottom: 12px; }
-            .bubble { padding: 10px 16px; font-size: 17px; background: rgba(255,255,255,0.55); }
-            .bubble span { margin: 0 6px; }
+        @media (max-width: 680px) {
+            .page {
+                width: min(100% - 26px, 1120px);
+                padding: 26px 0 34px;
+            }
+
+            .topbar {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                width: 124px;
+                height: 46px;
+            }
+
+            .logo img {
+                height: 38px;
+            }
+
+            .search input {
+                min-height: 50px;
+                font-size: 17px;
+                line-height: 50px;
+                padding: 0 18px;
+            }
+
+            .site-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .group {
+                padding: 16px;
+            }
+
+            .group h2 {
+                font-size: 16px;
+            }
+
+            .pill {
+                min-height: 40px;
+                padding: 8px 14px;
+                font-size: 16px;
+                background: rgba(255, 255, 255, 0.55);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="page">
+        <header class="topbar">
+            <a class="logo" href="Bookmark.html" title="Bookmark">
+                <img src="images/g_n.png" alt="毛线导航">
+            </a>
 
-<header class="header">
-    <div class="logo">
-        <a href="Bookmark.html" title="Bookmark"><img src="images/g_n.png" alt="Logo"></a>
+            <form class="search" action="https://www.google.com/search" method="get">
+                <label for="search-query">Google Search</label>
+                <input id="search-query" type="search" name="q" placeholder="Google it..." autocomplete="off">
+            </form>
+        </header>
+
+        <main class="site-grid" aria-label="常用网站导航">
+            <section class="group" aria-labelledby="portal-news">
+                <h2 id="portal-news">Portal & News</h2>
+                <nav class="links" aria-label="Portal and news links">
+                    <span class="pill"><a href="https://cn.bing.com/">Bing</a><span class="sep">の</span><a class="hl" href="https://x.com/">X</a></span>
+                    <span class="pill"><a href="https://sports.sina.com.cn/">新浪</a><span class="sep">の</span><a class="hl" href="https://weibo.com/">微博</a></span>
+                    <span class="pill"><a href="https://www.baidu.com/">百度</a><span class="sep">の</span><a href="https://tieba.baidu.com/">贴吧</a></span>
+                    <span class="pill"><a href="http://www.qq.com/">腾讯</a><span class="sep">の</span><a href="https://mail.qq.com/">邮箱</a></span>
+                    <span class="pill"><a href="http://www.163.com/">网易</a><span class="sep">の</span><a href="http://email.163.com/">邮箱</a></span>
+                    <span class="pill"><a href="https://www.sohu.com/">搜狐</a></span>
+                    <span class="pill"><a href="http://www.ifeng.com/">凤凰网</a></span>
+                    <span class="pill"><a href="https://tophub.today/">热榜</a><span class="sep">の</span><a href="https://mo.fish/">摸鱼</a></span>
+                </nav>
+            </section>
+
+            <section class="group" aria-labelledby="ai-tech">
+                <h2 id="ai-tech">AI & Tech</h2>
+                <nav class="links" aria-label="AI and technology links">
+                    <span class="pill"><a href="https://www.google.com/ncr">Google</a><span class="sep">の</span><a href="https://gemini.google.com/">Gemini</a></span>
+                    <span class="pill"><a href="https://kimi.moonshot.cn/">Kimi</a><span class="sep">の</span><a href="https://www.yuque.com/">语雀</a></span>
+                    <span class="pill"><a href="https://news.google.com/news?ned=us">News</a><span class="sep">の</span><a href="https://news.google.com/news?ned=cn">新闻</a></span>
+                    <span class="pill"><a href="https://www.ithome.com/">IT之家</a></span>
+                    <span class="pill"><a href="http://www.thepaper.cn/">澎湃</a><span class="sep">の</span><a href="http://www.people.com.cn/">人民</a></span>
+                    <span class="pill"><a href="https://zh.wikipedia.org/">Wikipedia</a></span>
+                </nav>
+            </section>
+
+            <section class="group" aria-labelledby="dev-code">
+                <h2 id="dev-code">Dev & Code</h2>
+                <nav class="links" aria-label="Developer and code links">
+                    <span class="pill"><a href="https://github.com/">GitHub</a></span>
+                    <span class="pill"><a href="https://juejin.im/">掘金</a><span class="sep">の</span><a class="hl" href="https://www.v2ex.com/">V2EX</a></span>
+                    <span class="pill"><a href="https://www.oschina.net/">OS</a><span class="sep">の</span><a href="https://tool.oschina.net/">Tools</a></span>
+                    <span class="pill"><a href="http://www.csdn.net/">CSDN</a></span>
+                    <span class="pill"><a href="https://www.cnblogs.com/">cnBlogs</a></span>
+                    <span class="pill"><a href="https://www.nowcoder.com/">NowCoder</a></span>
+                    <span class="pill"><a class="hl" href="http://tieba.baidu.com/f?kw=%E6%98%BE%E5%8D%A1">显卡</a><span class="sep">の</span><a href="http://www.zol.com.cn/">ZOL</a></span>
+                </nav>
+            </section>
+
+            <section class="group" aria-labelledby="social-media">
+                <h2 id="social-media">Social & Media</h2>
+                <nav class="links" aria-label="Social and media links">
+                    <span class="pill"><a class="hl" href="https://www.youtube.com/?gl=US">YouTube</a></span>
+                    <span class="pill"><a href="https://wx.qq.com/">微信</a><span class="sep">の</span><a href="https://v.qq.com/">视频</a></span>
+                    <span class="pill"><a href="https://www.bilibili.com/">Bilibili</a><span class="sep">の</span><a href="https://www.youku.com/">优酷</a></span>
+                    <span class="pill"><a href="https://www.douyin.com/">抖音</a><span class="sep">の</span><a href="https://www.xiaohongshu.com/">小红书</a></span>
+                    <span class="pill"><a class="hl" href="https://www.zhihu.com/">知乎</a><span class="sep">の</span><a href="https://www.quora.com/">Quora</a></span>
+                    <span class="pill"><a href="https://www.douban.com/">豆瓣</a><span class="sep">の</span><a href="https://music.163.com/">云音乐</a></span>
+                    <span class="pill"><a href="https://www.douyu.com/room/follow">DY</a><span class="sep">の</span><a href="https://www.panda.tv/myfollow">PD</a></span>
+                </nav>
+            </section>
+
+            <section class="group" aria-labelledby="life-buy">
+                <h2 id="life-buy">Life & Buy</h2>
+                <nav class="links" aria-label="Life and shopping links">
+                    <span class="pill"><a href="https://www.taobao.com/">淘宝</a><span class="sep">の</span><a href="https://www.fliggy.com/">飞猪</a></span>
+                    <span class="pill"><a href="https://www.jd.com/">京东</a></span>
+                    <span class="pill"><a href="http://www.icbc.com.cn/">工银</a><span class="sep">の</span><a href="http://www.psbc.com/">邮储</a></span>
+                    <span class="pill"><a href="http://www.12306.cn/">12306</a></span>
+                    <span class="pill"><a href="http://www.bupt.edu.cn/">BUPT</a><span class="sep">の</span><a href="https://bj.ke.com/">贝壳</a></span>
+                    <span class="pill"><a href="https://bbs.byr.cn/#!default">BYR</a></span>
+                </nav>
+            </section>
+
+            <section class="group" aria-labelledby="games-fun">
+                <h2 id="games-fun">Games & Fun</h2>
+                <nav class="links" aria-label="Games and fun links">
+                    <span class="pill"><a href="https://bbs.nga.cn/">NGA</a></span>
+                    <span class="pill"><a href="https://www.hupu.com/">虎扑</a><span class="sep">の</span><a href="https://www.gcores.com/">机核</a></span>
+                    <span class="pill"><a href="http://www.yxzzd.com/">Xbox早知道</a></span>
+                    <span class="pill"><a href="https://www.gamersky.com/">游民星空</a></span>
+                    <span class="pill"><a href="https://weread.qq.com/">微信读书</a></span>
+                    <span class="pill"><a href="http://www.qidian.com/">起点</a><span class="sep">の</span><a href="https://fanqienovel.com/">番茄</a></span>
+                </nav>
+            </section>
+        </main>
     </div>
-
-    <div class="search-box">
-        <form action="https://www.google.com/search" method="get">
-            <input type="text" name="q" placeholder="Google it..." autocomplete="off">
-        </form>
-    </div>
-</header>
-
-<div class="main-content">
-    
-    <!-- Row 1, Col 1 -->
-    <div class="group-card">
-        <div class="group-title">Portal & News</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://cn.bing.com/">Bing</a><span>の</span><a href="https://x.com/"><span class="hl">X</span></a></div>
-            <div class="bubble"><a href="https://sports.sina.com.cn/">新浪</a><span>の</span><a href="https://weibo.com/"><span class="hl">微博</span></a></div>
-            <div class="bubble"><a href="https://www.baidu.com/">百度</a><span>の</span><a href="https://tieba.baidu.com/">贴吧</a></div>
-            <div class="bubble"><a href="http://www.qq.com/">腾讯</a><span>の</span><a href="https://mail.qq.com/">邮箱</a></div>
-            <div class="bubble"><a href="http://www.163.com/">网易</a><span>の</span><a href="http://email.163.com/">邮箱</a></div>
-            <div class="bubble"><a href="https://www.sohu.com/">搜狐</a></div>
-            <div class="bubble"><a href="http://www.ifeng.com/">凤凰网</a></div>
-            <div class="bubble"><a href="https://tophub.today/">热榜</a><span>の</span><a href="https://mo.fish/">摸鱼</a></div>
-        </div>
-    </div>
-
-    <!-- Row 1, Col 2 -->
-    <div class="group-card">
-        <div class="group-title">AI & Tech</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://www.google.com/ncr">Google</a><span>の</span><a href="https://gemini.google.com/">Gemini</a></div>
-            <div class="bubble"><a href="https://kimi.moonshot.cn/">Kimi</a><span>の</span><a href="https://www.yuque.com/">语雀</a></div>
-            <div class="bubble"><a href="https://news.google.com/news?ned=us">News</a><span>の</span><a href="https://news.google.com/news?ned=cn">新闻</a></div>
-            <div class="bubble"><a href="https://www.ithome.com/">IT之家</a></div>
-            <div class="bubble"><a href="http://www.thepaper.cn/">澎湃</a><span>の</span><a href="http://www.people.com.cn/">人民</a></div>
-            <div class="bubble"><a href="https://zh.wikipedia.org/">Wikipedia</a></div>
-        </div>
-    </div>
-
-    <!-- Row 1, Col 3: Dev & Code -->
-    <div class="group-card">
-        <div class="group-title">Dev & Code</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://github.com/">GitHub</a></div>
-            <div class="bubble"><a href="https://juejin.im/">掘金</a><span>の</span><a href="https://www.v2ex.com/"><span class="hl">V2EX</span></a></div>
-            <div class="bubble"><a href="https://www.oschina.net/">OS</a><span>の</span><a href="https://tool.oschina.net/">Tools</a></div>
-            <div class="bubble"><a href="http://www.csdn.net/">CSDN</a></div>
-            <div class="bubble"><a href="https://www.cnblogs.com/">cnBlogs</a></div>
-            <div class="bubble"><a href="https://www.nowcoder.com/">NowCoder</a></div>
-            <div class="bubble"><a href="http://tieba.baidu.com/f?kw=%E6%98%BE%E5%8D%A1"><span class="hl">显卡</span></a><span>の</span><a href="http://www.zol.com.cn/">ZOL</a></div>
-        </div>
-    </div>
-
-    <!-- Row 2, Col 1: Social & Media -->
-    <div class="group-card">
-        <div class="group-title">Social & Media</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://www.youtube.com/?gl=US"><span class="hl">YouTube</span></a></div>
-            <div class="bubble"><a href="https://wx.qq.com/">微信</a><span>の</span><a href="https://v.qq.com/">视频</a></div>
-            <div class="bubble"><a href="https://www.bilibili.com/">Bilibili</a><span>の</span><a href="https://www.youku.com/">优酷</a></div>
-            <div class="bubble"><a href="https://www.douyin.com/">抖音</a><span>の</span><a href="https://www.xiaohongshu.com/">小红书</a></div>
-            <div class="bubble"><a href="https://www.zhihu.com/"><span class="hl">知乎</span></a><span>の</span><a href="https://www.quora.com/">Quora</a></div>
-            <div class="bubble"><a href="https://www.douban.com/">豆瓣</a><span>の</span><a href="https://music.163.com/">云音乐</a></div>
-            <div class="bubble"><a href="https://www.douyu.com/room/follow">DY</a><span>の</span><a href="https://www.panda.tv/myfollow">PD</a></div>
-        </div>
-    </div>
-
-    <!-- Row 2, Col 2 -->
-    <div class="group-card">
-        <div class="group-title">Life & Buy</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://www.taobao.com/">淘宝</a><span>の</span><a href="https://www.fliggy.com/">飞猪</a></div>
-            <div class="bubble"><a href="https://www.jd.com/">京东</a></div>
-            <div class="bubble"><a href="http://www.icbc.com.cn/">工银</a><span>の</span><a href="http://www.psbc.com/">邮储</a></div>
-            <div class="bubble"><a href="http://www.12306.cn/">12306</a></div>
-            <div class="bubble"><a href="http://www.bupt.edu.cn/">BUPT</a><span>の</span><a href="https://bj.ke.com/">贝壳</a></div>
-            <div class="bubble"><a href="https://bbs.byr.cn/#!default">BYR</a></div>
-        </div>
-    </div>
-
-    <!-- Row 2, Col 3 -->
-    <div class="group-card">
-        <div class="group-title">Games & Fun</div>
-        <div class="bubble-flow">
-            <div class="bubble"><a href="https://bbs.nga.cn/">NGA</a></div>
-            <div class="bubble"><a href="https://www.hupu.com/">虎扑</a><span>の</span><a href="https://www.gcores.com/">机核</a></div>
-            <div class="bubble"><a href="http://www.yxzzd.com/">Xbox早知道</a></div>
-            <div class="bubble"><a href="https://www.gamersky.com/">游民星空</a></div>
-            <div class="bubble"><a href="https://weread.qq.com/">微信读书</a></div>
-            <div class="bubble"><a href="http://www.qidian.com/">起点</a><span>の</span><a href="https://fanqienovel.com/">番茄</a></div>
-        </div>
-    </div>
-
-</div>
-
 </body>
 </html>
